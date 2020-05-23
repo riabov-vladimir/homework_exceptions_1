@@ -1,9 +1,9 @@
 documents = [
+	{"type": "insurance", "name": "123123"}
 	{"type": "passport", "number": "2207 876234", "name": "Василий Гупкин"},
 	{"type": "invoice", "number": "11-2", "name": "Геннадий Покемонов"},
 	{"type": "insurance", "number": "10006", "name": "Аристарх Павлов"},
-	{"type": "insurance", "name": "123123"}
-]
+	]
 
 directories = {
 	'1': ['2207 876234', '11-2', '5455 028765'],
@@ -20,11 +20,7 @@ def main():
 		elif user_input == 's':
 			shelf(directories)
 		elif user_input == 'l':
-			try:
-				documents_list(documents)
-			except KeyError as e:
-				print('В одном из документов отсутствует ключ', e)
-			# try\except для команды 'l' выводит недостающий ключ на экран <<<-----------------------
+			documents_list(documents)
 		elif user_input == 'ls':
 			list_shelfs(directories)
 		elif user_input == 'd':
@@ -43,8 +39,12 @@ def documents_list(documents):
 	'''
 	l – list – команда, которая выведет список всех документов
 	'''
-	for client in documents:
-		print(f'{client["type"]} "{client["number"]}" "{client["name"]}"')
+	try: # try\except для команды 'l' выводит недостающий ключ на экран <<<-----------------------
+		for client in documents:
+			print(f'{client["type"]} "{client["number"]}" "{client["name"]}"')
+	except KeyError as e:
+		print('В одном из документов отсутствует ключ', e)
+
 
 
 def list_shelfs(directories):
@@ -60,7 +60,7 @@ def person(data_base):
 	p – people – команда, которая спросит номер документа
 	 и выведет имя человека, которому он принадлежит
 	'''
-	directories_docs = []  # как будет время сделаю эту проверку через отдельную функцию, сорри отстал от программы просто(
+	directories_docs = []
 
 	for x in directories.values():
 		directories_docs = directories_docs + x
