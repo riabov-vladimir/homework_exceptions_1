@@ -1,5 +1,5 @@
 documents = [
-	{"type": "insurance", "name": "123123"}
+	{"type": "insurance", "name": "123123"}, # <<<----------------------------- запись с недостающим ключём
 	{"type": "passport", "number": "2207 876234", "name": "Василий Гупкин"},
 	{"type": "invoice", "number": "11-2", "name": "Геннадий Покемонов"},
 	{"type": "insurance", "number": "10006", "name": "Аристарх Павлов"},
@@ -39,11 +39,11 @@ def documents_list(documents):
 	'''
 	l – list – команда, которая выведет список всех документов
 	'''
-	try: # try\except для команды 'l' выводит недостающий ключ на экран <<<-----------------------
-		for client in documents:
+	for client in documents:
+		try:  # try\except для команды 'l' выводит недостающий ключ на экран <<<-----------------------
 			print(f'{client["type"]} "{client["number"]}" "{client["name"]}"')
-	except KeyError as e:
-		print('В одном из документов отсутствует ключ', e)
+		except KeyError as e:
+			print('В одном из документов отсутствует ключ', e)
 
 
 
