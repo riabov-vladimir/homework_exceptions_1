@@ -11,12 +11,11 @@ def polish_notation():
 	user_input = input('Введите выражение в формате [x y z], где x - оператор, а y, z - операнды \n')
 	operator = user_input.strip()[0]
 
-	try:
-		assert len(user_input.split()) == 3, 'Неверное кол-во аргументов'
-		assert operator in ['+', '-', '/', '*'], 'Недопустимая операция, первый аргумент должен указывать на ' \
-		                                         'арифметическое действие (/, *, -, +)'
-	except AssertionError as e:
-		return e
+
+	assert len(user_input.split()) == 3, 'Неверное кол-во аргументов'
+	assert operator in ['+', '-', '/', '*'], 'Недопустимая операция, первый аргумент должен указывать на ' \
+	                                         'арифметическое действие (/, *, -, +)'
+
 
 	try:
 		operand_1 = int(user_input.split()[1])
@@ -28,22 +27,20 @@ def polish_notation():
 	except Exception as e:
 		return 'Операнд 2 не является числом'
 
-	try:
-		if operator == '+':
-			return operand_1 + operand_2
-		elif operator == '-':
-			return operand_1 - operand_2
-		elif operator == '*':
-			return operand_1 * operand_2
-		elif operator == '/':
+
+	if operator == '+':
+		return operand_1 + operand_2
+	elif operator == '-':
+		return operand_1 - operand_2
+	elif operator == '*':
+		return operand_1 * operand_2
+	elif operator == '/':
+		try:
 			return operand_1 / operand_2
-	except ZeroDivisionError as e:
-		return e
+		except ZeroDivisionError as e:
+			return e
 
+print(polish_notation())
 
-try:
-	print(polish_notation())
-except Exception as e:
-	print(e)
 
 
